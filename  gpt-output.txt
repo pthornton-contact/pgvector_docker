@@ -1,0 +1,46 @@
+Sure! Here's how you can define a Terraform configuration using the official Terraform Docker provider to create the pgvector container 
+and the Flask app container.
+
+First, you need to create a `provider.tf` file to specify the Docker provider:
+
+```hcl
+# provider.tf
+run/docker.sock"
+}provider "docker" {
+  host = "unix:///var/
+```
+
+Next, create a `main.tf` file to define the resources (containers, images, and networks):
+
+```hcl
+ 
+```
+
+Here's what the configuration does:
+
+1. Defines the Docker provider to use Unix sockets to communicate with the Docker daemon.
+2. Creates a Docker image resource for pgvector and a Docker container resource using that image.
+3. Creates a Docker image resource for the Flask app (note that you should build and create the image of your Flask app beforehand).
+4. Creates a Docker container resource for the Flask app using the app's Docker image and links it to the pgvector container.
+
+To run the Terraform configuration, you need to:
+
+1. Build your Flask app's Docker image:
+
+   ```sh
+   docker build -t your_flask_app_image:latest .
+   ```
+
+2. Initialize Terraform in the directory that contains your `provider.tf` and `main.tf`:
+
+   ```sh
+   terraform init
+   ```
+
+3. Apply the Terraform configuration to create the Docker resources:
+
+   ```sh
+   terraform apply
+   ```
+
+This will start both (pgvector and Flask app) containers using Terraform with the specified configurations.
