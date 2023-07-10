@@ -1,13 +1,23 @@
-services:
-    pgvector:
-        image: ankane/pgvector:latest
-        environment:
-            POSTGRES_DB: langchain
-            POSTGRES_USER: pguser
-            POSTGRES_PASSWORD: password
-        ports:
-          -  "5432:5432"
-       # volumes:
-        #  -  ~/volumes/pgvector"/var/lib/postgresql/data    
+# services:
+#     pgvector:
+#         image: ankane/pgvector:latest
+#         environment:
+#             POSTGRES_DB: langchain
+#             POSTGRES_USER: pguser
+#             POSTGRES_PASSWORD: password
+#         ports:
+#           -  "5432:5432"
+#        # volumes:
+#         #  -  ~/volumes/pgvector"/var/lib/postgresql/data    
 
-          
+version: '3'
+services:
+  langchain-server:
+    build: ./docker/langchain-server
+    tty: true
+    ports:
+     - "8081:8081"
+  web-frontend:
+    build: ./docker/web-frontend
+    ports:
+      - "8080:8080"
